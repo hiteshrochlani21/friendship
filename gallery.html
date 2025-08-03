@@ -167,52 +167,70 @@
             margin-top: 40px;
         }
 
-        .image-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px var(--card-shadow);
-            overflow: hidden;
-            position: relative;
-            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            cursor: pointer;
-            transform-style: preserve-3d;
-            transform: rotateY(0deg);
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(5px);
-        }
-
-        .image-card:hover {
-            transform: scale(1.05) rotateY(5deg);
-            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.4);
-        }
-        
-        .image-card img {
-            width: 100%;
-            height: 250px; /* Consistent height for a neat grid */
-            object-fit: cover;
-            display: block;
-            border-radius: 20px 20px 0 0;
-            transition: transform 0.4s ease;
-        }
-        .image-card:hover img {
-            transform: scale(1.1);
-        }
-
         .image-card .caption {
-            font-family: var(--font-caption);
-            padding: 15px;
-            font-size: 1.5rem;
-            line-height: 1.4;
-            color: #555;
-            text-align: left;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-        }
-        .image-card:hover .caption {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    font-family: var(--font-caption);
+    padding: 15px;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: #555;
+    text-align: left;
+    opacity: 0; /* Hide the text initially */
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    position: absolute; /* Positioning the text below the image */
+    bottom: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8); /* Slight background to make text more readable */
+    border-radius: 0 0 20px 20px;
+}
+
+.image-card:hover .caption {
+    opacity: 1; /* Text becomes visible on hover */
+    transform: translateY(0);
+}
+
+.image-card {
+    position: relative; /* Make sure captions are positioned within the card */
+    background: var(--card-bg);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px var(--card-shadow);
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transform: rotateY(0deg);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    height: 100%; /* Ensure full height of the card */
+}
+
+.image-card img {
+    margin-top: 0; /* Removed margin for better alignment */
+    width: 100%;
+    height: 100%; /* Ensure image fills the entire card */
+    object-fit: cover;
+    display: block;
+    border-radius: 20px 20px 0 0;
+    transition: transform 0.4s ease;
+}
+
+.image-card:hover img {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+@media (max-width: 768px) {
+    /* Mobile view adjustments */
+    .image-card {
+        height: auto; /* Allow card height to be flexible */
+    }
+
+    .image-card .caption {
+        font-size: 1.2rem; /* Smaller text size for mobile */
+        padding: 10px;
+    }
+}
+
+
 
         /* * ----------------------------------------
         * Interactive Buttons
@@ -277,6 +295,21 @@
             .button-group { flex-direction: column; gap: 15px; }
         }
 
+        @media (max-width: 768px) {
+    .main-title { font-size: 2.8rem; }
+    .image-grid { 
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ensures that images adjust on smaller screens */
+    }
+    .image-card img { 
+        height: auto; 
+        max-height: 100%; 
+    }
+    .image-card .caption { font-size: 1.2rem; }
+    .shuffle-btn, .next-btn { padding: 15px 25px; font-size: 1rem; }
+    .button-group { flex-direction: column; gap: 15px; }
+}
+
+
     </style>
 </head>
 <body>
@@ -304,47 +337,47 @@
         <div class="button-group">
             <button class="shuffle-btn" onclick="shuffleCards()">Feeling Nostalgic? Shuffle! 💫</button>
         </div>
-        
+    
         <div class="image-grid" id="image-grid">
             <div class="image-card" data-aos="zoom-in" data-aos-delay="100">
-                <img src="https://m.media-amazon.com/images/I/715bc6KOR2L._UF350,350_QL50_.jpg" alt="Friends having a picnic">
+                <img src="https://lh3.googleusercontent.com/d/1yXlQZNP6rZFEKYpGo62epKYPtSaY-08a" alt="Friends having a picnic">
                 <div class="caption">
-                    “Woh trip yaad hai? Sabse best trip thi!”
+                    “Hayyee, teri smile toh bilkul **heart-melting** hai! 😍😊”
                 </div>
             </div>
 
             <div class="image-card" data-aos="zoom-in" data-aos-delay="200">
-                <img src="https://i.pinimg.com/236x/d7/8a/e1/d78ae10a3cea11da4ffc68030b5c8d88.jpg" alt="Friends taking a selfie">
+                <img src="https://lh3.googleusercontent.com/d/1IQlQwnbC2oFcR-0reUXNXcJk0H6E-q_o" alt="Friends taking a selfie">
                 <div class="caption">
-                    “Group photo, but tu sabse alag chamakta hai 😎✨”
+                    “Kaash yeh din **phir se** aajaye... 😎✨ Best moments! 💫”
                 </div>
             </div>
 
             <div class="image-card" data-aos="zoom-in" data-aos-delay="300">
-                <img src="https://i.pinimg.com/originals/5e/53/d4/5e53d407c2b51b48f7e4a73fc7037d84.jpg" alt="Friends laughing together">
+                <img src="https://lh3.googleusercontent.com/d/1SrTl38K8SUsZ8z1fRWZAnOQVrJd6DHG2"alt="Friends laughing together">
                 <div class="caption">
-                    “Tu nahi hota toh life boring ho jaati 😪”
+                    “**Yeh photo** hai ya koi **movie scene**? 😂 Mirror bhi **tut jaaye** is smile se! 💥”
                 </div>
             </div>
 
             <div class="image-card" data-aos="zoom-in" data-aos-delay="400">
-                <img src="https://i.pinimg.com/236x/63/de/5f/63de5fd134fc22bced1be0949ac289fe.jpg" alt="Friends walking on a beach">
+                <img src="https://lh3.googleusercontent.com/d/1PqQfkHHaudBgdHhyyq3bhKKGTKm1roPz" alt="Friends walking on a beach">
                 <div class="caption">
-                    “Har musibat mein tu saath tha! ❤️”
+                    “**Baal toh** baat hi alag hai, lekin **style** ki bhi koi **limit** hoti hai! 😎💁‍♂️🔥❤️”
                 </div>
             </div>
 
             <div class="image-card" data-aos="zoom-in" data-aos-delay="500">
-                <img src="https://i.pinimg.com/236x/f8/ce/4c/f8ce4c98d6bcde062c1e11462a558583.jpg" alt="Friends having a picnic">
+                <img src="https://lh3.googleusercontent.com/d/1AakZI4qAnEwMZb6SMsqNZzjBXkv3_qOu" alt="Friends having a picnic">
                 <div class="caption">
-                    “Tere saath har pal jaise ek naya adventure tha!”
+                    “Ufff!** Tera **pose** aur **smile** toh sabko **fida** kar de! 😍🔥 **Glamour** toh **next level!** ✨”
                 </div>
             </div>
 
             <div class="image-card" data-aos="zoom-in" data-aos-delay="600">
-                <img src="https://i.pinimg.com/236x/d7/a5/e2/d7a5e2463e4edd15a3c7fab5a55a8a87.jpg" alt="Another great memory">
+                <img src="https://lh3.googleusercontent.com/d/1k04PolpYLolmC-nXbyc0nouzhVGCyHQy" alt="Another great memory">
                 <div class="caption">
-                    “Yaad hai wo din jab humne milke woh problem solve ki thi!🧠”
+                    “**Ek din** yeh **dream** sach ho, aur hum **saath** ho! 💭✨”
                 </div>
             </div>
             
